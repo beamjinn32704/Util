@@ -28,60 +28,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Utilll {
     
-    
-    
-    public static double removeDecimal(double num, int maxDec){
-        String rep = Double.toString(num);
-        if(rep.length() - (rep.lastIndexOf(".") + 1) <= maxDec){
-            return num;
-        }
-        //123.45
-        //(int)(123.45 * (maxDec * 10)) = 1234 / (maxDec * 10)
-        double factor = Math.pow(10, maxDec);
-        return (double)((int) (num * factor)) / factor;
-    }
-    
-    public static String formatBytes(long d){
-        double data = (double)d;
-        String type = "B";
-        String coefficient = "";
-        if(d < 0){
-            coefficient = "-";
-            data = Math.abs(data);
-        }
-        if(data / 1024.0 >= 1.0){
-            type = "KB";
-            data /= 1024.0;
-            if(data / 1024.0 >= 1.0){
-                type = "MB";
-                data /= 1024.0;
-                if(data / 1024.0 >= 1.0){
-                    type = "GB";
-                    data /= 1024.0;
-                    if(data / 1024.0 >= 1.0){
-                        type = "TB";
-                        data /= 1024.0;
-                    }
-                }
-            }
-        }
-        data = removeDecimal(data, 1);
-        if(data < 0){
-            coefficient = "";
-        }
-        return coefficient + data + " " + type;
-    }
-    
-    public static double map(double num, double numMin, double numMax, double mappedNumMin, double mappedNumMax){
-        double min1 = numMin;
-        double max1 = numMax;
-        double min2 = mappedNumMin;
-        double max2 = mappedNumMax;
-        return ((num - min1) * (max2 - min2) / (max1 - min1)) + min2;
-    }
-    
-    public static String getPCUserName(){
-        return System.getProperty("user.name");
+    public static void main(String[] args){
     }
     
     
