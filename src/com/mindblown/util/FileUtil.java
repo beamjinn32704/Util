@@ -7,7 +7,9 @@ package com.mindblown.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
@@ -222,5 +224,43 @@ public class FileUtil {
         }
         System.out.println("NO ROOT");
         return null;
+    }
+    
+    /**
+     * Appends a string to a file
+     * @param fileToWriteTo the file the string toWrite should be appended to
+     * @param toWrite the string to append to fileToWriteTo
+     * @return whether the operation was completed with no errors
+     */
+    public static boolean writeToFile(File fileToWriteTo, String toWrite){
+        return writeToFile(fileToWriteTo, toWrite, false);
+    }
+    
+    /**
+     * Modifies a file.
+     * @param fileToWriteTo the file to modify
+     * @param toWrite the string to modify the file with
+     * @param append whether the string should be appended to the file. If this variable is true, 
+     * the string toWrite will be appended. Otherwise, all the text in fileToWriteTo will be replaced 
+     * with the string toWrite
+     * @return whether the operation was completed with no errors
+     */
+    public static boolean writeToFile(File fileToWriteTo, String toWrite, boolean append){
+        try(FileOutputStream fo = new FileOutputStream(fileToWriteTo, append)){
+            fo.write(toWrite.getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Returns the directory that the program is running in.
+     * @return the directory / folder that the program is running in.
+     */
+    public static String getCurrentWorkingDirectory(){
+        String dir = System.getProperty("user.dir");
+        return dir;
     }
 }

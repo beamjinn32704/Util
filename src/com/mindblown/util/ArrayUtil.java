@@ -308,5 +308,25 @@ public class ArrayUtil {
 //        //Add the object to the index where object should go
 //        array.add(index, object);
 //    }
+    
+    /**
+     * This function merges all 1-D elements of the arrays passed into a single new array.If given [1, 5] and [3, 2], this would return [1, 5, 3, 2].
+     * If given [1, 5], [3, 2], and [10, 7], this would return [1, 5, 3, 2, 10, 7].
+ If given [1, 5,], [3, 2], and [[10, 7], [4, 8]], this would return [1, 5, 3, 2, [10, 7], [4, 8]].
+     * @param <T> the class of the objects in the array
+     * @param arr1 the first array (that merges with arr2, the second array)
+     * @param arr2 the second array (that merges with arr1, the first array)
+     * @param arrs Any other arrays should be merged along with arr1 and arr2 
+     * @return arr1, arr2, and arrs merged together
+     */
+    public static <T> T[] mergeArrays(T[] arr1, T[] arr2, T[]... arrs){
+        ArrayList<Object> objList = new ArrayList<>();
+        objList.addAll(ArrayUtil.toList(arr1));
+        objList.addAll(ArrayUtil.toList(arr2));
+        if(arrs.length > 0){
+            objList.addAll(ArrayUtil.toList(arrs));
+        }
+        return objList.toArray(arr1);
+    }
 
 }
