@@ -7,7 +7,6 @@ package com.mindblown.util;
 
 import java.awt.Desktop;
 import java.io.File;
-import java.io.PrintWriter;
 import java.net.URI;
 
 /**

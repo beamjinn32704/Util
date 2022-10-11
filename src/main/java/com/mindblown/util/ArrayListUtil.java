@@ -131,7 +131,7 @@ public class ArrayListUtil {
      * @param key The key equivalent to the element trying to be found
      * @return Whether list has an an element equivalent to key
      */
-    public static <K extends Comparable, T extends Comparable<? super K>> boolean sortedHas(ArrayList<T> list, K key){
+    public static <K extends Comparable<K>, T extends Comparable<? super K>> boolean sortedHas(ArrayList<T> list, K key){
         //If sortedIndexOf returns an index at least 0, it means that there's an element equivalent to key in the list
         return sortedIndexOf(list, key) > -1;
     }
