@@ -13,6 +13,47 @@ import java.util.regex.Pattern;
  * @author beamj
  */
 public class StringUtil {
+    
+    /**
+     * A class that allows a programmer to evaluate a string and return a certain value, like a boolean, integer, etc.
+     */
+    public interface StringEvaluator {
+        boolean booleanEval(String s);
+        int intEval(String s);
+        String strEval(String s);
+        Object objEval(String s);
+    }
+    
+    /**
+     * Returns the index of the first of a certain type of character in a string.
+     * @param text the string to go through and find the character 
+     * @param startIdx the first index in the string to start looking for the character
+     * @param endIdx the last index in the string to start looking for the character
+     * @param eval an object that evaluates each character in the string. This function will call eval's booleanEval() function 
+     * to determine whether the character is acceptable (the character is acceptable if booleanEval(the-character) returns true.
+     * @param reverse whether to walk through the string in reverse (starting at the end index and walking backwards and stopping 
+     * at the start index).
+     * @return the index of the first character in the string that gets eval.booleanEval() to return true. If no character in the 
+     * text string evaluates as true, the number returned will be -1.
+     */
+    public static int nextOf(String text, int startIdx, int endIdx, StringEvaluator eval, boolean reverse){
+        assert(startIdx >= 0 && endIdx < text.length());
+        if (!reverse){
+            for (int i = startIdx; i <= endIdx; i++){
+                if (eval.booleanEval(text.charAt(i) + "")){
+                    return i;
+                }
+            }   
+        } else {
+            for (int i = endIdx; i >= startIdx; i--){
+                if (eval.booleanEval(text.charAt(i) + "")){
+                    return i;
+                }
+            }
+        }
+        return -1;
+        
+    }
 
     /**
      * Returns the first alphabetic character in the string
